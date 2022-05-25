@@ -54,7 +54,7 @@ app.use((request, response, next) => {
 
 // Error handler
 app.use((error, request, response, next) => {
-  // console.error(error);
+  console.error(error);
   response.status(400).send(error);
 });
 

@@ -1,6 +1,11 @@
 const request = require("supertest");
 const pastes = require("../src/data/pastes-data");
-const app = require("../src/app");
+
+const path = require("path");
+const app = require(path.resolve(
+  `${process.env.SOLUTION_PATH || ""}`,
+  "src/app"
+));
 
 describe("path /pastes", () => {
   // Add tests here
@@ -9,8 +14,7 @@ describe("path /pastes", () => {
   });
 
   test("returns an error if the route path does not exist", async () => {
-    const response = await request(app)
-      .get("/pdasdasd")
+    const response = await request(app).get("/pdasdasd");
 
     expect(response.status).toBeGreaterThanOrEqual(400);
     expect(response.text).toContain("Not found: /pdasdasd");
@@ -123,5 +127,4 @@ describe("path /pastes", () => {
     expect(response.status).toBe(400);
   });
   afterEach(() => {});
-  
 });
