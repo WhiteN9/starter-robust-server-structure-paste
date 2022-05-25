@@ -49,13 +49,13 @@ app.post("/pastes", (req, res, next) => {
 
 // Not found handler
 app.use((request, response, next) => {
-  response.send(`Not found: ${request.originalUrl}`);
+  response.status(400).send(`Not found: ${request.originalUrl}`);
 });
 
 // Error handler
 app.use((error, request, response, next) => {
-  console.error(error);
-  response.send(error);
+  // console.error(error);
+  response.status(400).send(error);
 });
 
 module.exports = app;
