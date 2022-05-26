@@ -78,9 +78,7 @@ describe("path /pastes", () => {
     });
 
     test("returns an error if the paste does not exist", async () => {
-      const response = await request(app)
-        .get("/pastes/99")
-        .set("Accept", "application/json");
+      const response = await request(app).get("/pastes/99");
 
       expect(response.status).toBeGreaterThanOrEqual(400);
       expect(response.text).toContain("Paste id not found: 99");
