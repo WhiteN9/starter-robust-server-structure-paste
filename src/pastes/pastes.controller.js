@@ -95,6 +95,20 @@ function create(req, res) {
   res.status(201).json({ data: newPaste });
 }
 
+function update(req, res) {
+  const { pasteId } = req.params;
+  const foundPaste = pastes.find((paste) => paste.id === Number(pasteId));
+  const { data: { name, syntax, expiration, exposure, text } = {} } = req.body;
+
+  // Update the paste
+  foundPaste.name = name;
+  foundPaste.syntax = syntax;
+  foundPaste.expiration = expiration;
+  foundPaste.exposure = exposure;
+  foundPaste.text = text;
+
+  res.json({ data: foundPaste });
+}
 module.exports = {
   create: [
     bodyDataHas("name"),
@@ -110,4 +124,16 @@ module.exports = {
   ],
   list,
   read: [pasteExists, read],
+  update: [
+    pasteExists,
+    bodyDataHas("name"),
+    bodyDataHas("syntax"),
+    bodyDataHas("exposure"),
+    bodyDataHas("expiration"),
+    bodyDataHas("text"),
+    exposurePropertyIsValid,
+    syntaxPropertyIsValid,
+    expirationIsValidNumber,
+    update,
+  ],
 };

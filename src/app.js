@@ -11,7 +11,6 @@ app.use(express.json());
 //the Content-Type wasn't matched, or an error occurred.
 
 app.use("/pastes", pastesRouter);
-
 app.get("/pastes/:pasteId", pastesRouter);
 
 // Not found handler
