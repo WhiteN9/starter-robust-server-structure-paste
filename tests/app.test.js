@@ -93,6 +93,7 @@ describe("path /pastes", () => {
         expiration: 24,
         exposure: "public",
         text: "const stringReverse = str => str.split('').reverse().join('');",
+        user_id:1,
       };
       const response = await request(app)
         .post("/pastes")
