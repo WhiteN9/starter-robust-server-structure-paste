@@ -3,6 +3,7 @@ const app = express();
 const pastes = require("./data/pastes-data");
 
 const pastesRouter = require("./pastes/pastes.router");
+const usersRouter = require("./users/users.router");
 
 app.use(express.json());
 //The express.json() function is a built-in middleware that adds a body property to the request (req.body)
@@ -10,8 +11,10 @@ app.use(express.json());
 //or it will return an empty object ({}) if there was no body to parse,
 //the Content-Type wasn't matched, or an error occurred.
 
+app.use("/users", usersRouter);
 app.use("/pastes", pastesRouter);
-app.get("/pastes/:pasteId", pastesRouter);
+
+app.use("/pastes/:pasteId", pastesRouter);
 
 // Not found handler
 app.use((request, response, next) => {
