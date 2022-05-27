@@ -11,7 +11,7 @@ function userExists(req, res, next) {
     res.locals.user = foundUser;
     next();
   } else
-    ({
+    next({
       status: 404,
       message: `User id not found: ${userId}`,
     });
@@ -24,4 +24,5 @@ function read(req, res, next) {
 module.exports = {
   list,
   read: [userExists, read],
+  userExists,
 };

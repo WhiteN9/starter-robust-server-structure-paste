@@ -1,7 +1,12 @@
 const pastes = require("../data/pastes-data");
 
 function list(req, res) {
-  res.json({ data: pastes });
+  const { userId } = req.params;
+  res.json({
+    data: pastes.filter(
+      userId ? (paste) => paste.user_id == userId : () => true
+    ),
+  });
 }
 
 function pasteExists(req, res, next) {
