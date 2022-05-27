@@ -26,6 +26,7 @@ function read(req, res) {
 // Because some IDs may already be used, find the largest assigned ID
 let lastPasteId = pastes.reduce((maxId, paste) => Math.max(maxId, paste.id), 0);
 
+//how to write them separately?
 function bodyDataHas(propertyName) {
   return function (req, res, next) {
     const { data = {} } = req.body;
@@ -119,6 +120,7 @@ function destroy(req, res) {
 }
 
 module.exports = {
+  list,
   create: [
     bodyDataHas("name"),
     bodyDataHas("syntax"),
@@ -131,7 +133,6 @@ module.exports = {
     expirationIsValidNumber,
     create,
   ],
-  list,
   read: [pasteExists, read],
   update: [
     pasteExists,
